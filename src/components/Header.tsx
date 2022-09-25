@@ -1,12 +1,12 @@
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { Link } from "preact-router/match";
-import { send } from "../routes/TwoState/Machine";
 
-const HEADER_BUTTON_CLASS =
+export const HEADER_BUTTON_CLASS =
   "hover:underline inline-block py-2 px-4 text-gray-700 border border-transparent";
 const routes = [
   { path: "/", text: "Home" },
   { path: "/two-state", text: "2 state machine" },
+  { path: "/api-response", text: "Api Response" },
 ];
 
 export const Header = () => (
@@ -29,21 +29,5 @@ export const Header = () => (
         ))}
       </ul>
     </div>
-    <button
-      class={HEADER_BUTTON_CLASS}
-      onClick={() => {
-        send({ type: "ACTION" });
-      }}
-    >
-      Update state count
-    </button>
-    <button
-      class={HEADER_BUTTON_CLASS}
-      onClick={() => {
-        send({ type: "ACTION2" });
-      }}
-    >
-      Update state text
-    </button>
   </nav>
 );

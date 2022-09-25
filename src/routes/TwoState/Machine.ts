@@ -66,11 +66,14 @@ export const currentState = signal(service.getSnapshot().value);
 export const count = signal(service.getSnapshot().context.count);
 export const text = signal(service.getSnapshot().context.text);
 
-export const send: typeof service.send = (event, payload) => {
-  const sendReturn = service.send(event, payload);
-  const { context, value } = service.getSnapshot();
-  currentState.value = value;
+const mapData = ({
+  context,
+  value,
+}: ReturnType<typeof service.getSnapshot>) => {
   count.value = context.count;
   text.value = context.text;
-  return sendReturn;
+  currentState.value = value;
 };
+service.onTransition(mapData);
+
+export const send = service.send;

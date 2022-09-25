@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { send, currentState, count, text } from "./Machine";
+import { OtherComponent } from "./OtherComponent";
 
 type TwoStateAppProps = {
   path?: string;
@@ -10,9 +11,10 @@ export const TwoStateApp = ({}: TwoStateAppProps) => {
   rerenderCount += 1;
   return (
     <div class="m-16">
+      <OtherComponent />
       <div>
-        The buttons in the top right are in a different part of the Preact tree,
-        they alter the data for this component
+        The buttons above are in a different component, they alter the data for
+        this component
       </div>
       <br />
       <hr />
