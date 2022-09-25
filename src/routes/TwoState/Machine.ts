@@ -5,7 +5,6 @@ const initialContext = {
   count: 0,
   text: "aa",
 };
-
 const twoStateMachine = createMachine(
   {
     schema: {
@@ -60,20 +59,15 @@ const twoStateMachine = createMachine(
 );
 
 const service = interpret(twoStateMachine);
-service.start();
-
-export const currentState = signal(service.getSnapshot().value);
-export const count = signal(service.getSnapshot().context.count);
-export const text = signal(service.getSnapshot().context.text);
-
-const mapData = ({
-  context,
-  value,
-}: ReturnType<typeof service.getSnapshot>) => {
-  count.value = context.count;
-  text.value = context.text;
-  currentState.value = value;
-};
-service.onTransition(mapData);
 
 export const send = service.send;
+export const currentState = signal(service.getSnapshot().value);
+export const count = signal(initialContext.count);
+export const text = signal(initialContext.text);
+
+service.onTransition(({ context, value }) => {
+  currentState.value = value;
+  count.value = context.count;
+  text.value = context.text;
+});
+service.start();

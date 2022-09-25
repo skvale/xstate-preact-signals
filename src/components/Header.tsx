@@ -1,13 +1,15 @@
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { Link } from "preact-router/match";
 
 export const HEADER_BUTTON_CLASS =
   "hover:underline inline-block py-2 px-4 text-gray-700 border border-transparent";
-const routes = [
-  { path: "/", text: "Home" },
+
+export const pages = [
   { path: "/two-state", text: "2 state machine" },
-  { path: "/api-response", text: "Api Response" },
+  { path: "/api-response", text: "API Response" },
 ];
+
+const routes = [{ path: "/", text: "Home" }, ...pages];
 
 export const Header = () => (
   <nav class="flex items-center flex-wrap bg-stone-300 p-4 w-full border-b border-slate-500">

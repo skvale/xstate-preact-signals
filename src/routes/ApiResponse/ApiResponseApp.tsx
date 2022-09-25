@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { send, colors, currentState } from "./Machine";
+import { send, colors } from "./Machine";
 
 type ApiResponseAppProps = {
   path?: string;
@@ -11,13 +11,8 @@ export const ApiResponseApp = ({}: ApiResponseAppProps) => {
   return (
     <div class="m-16">
       <div>Rerendered: {rerenderCount}</div>
-      <div>{currentState.value}</div>
       <button
-        class={`bg-gray-300 border-4 ${
-          currentState.value === "loading"
-            ? "border-stone-700"
-            : "border-indigo-400"
-        } active:bg-gray-200 py-2 px-4`}
+        class={`bg-gray-300 border-4 active:bg-gray-200 py-2 px-4`}
         onClick={() => {
           send({ type: "FETCH" });
         }}

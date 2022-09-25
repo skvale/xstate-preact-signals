@@ -10,7 +10,7 @@
     "dev": "vite dev --port 3001",
     "lint": "eslint src",
     "test": "playwright test playwright.test.ts",
-    "test:update": "pnpm test --update-snapshots",
+    "test:update": "pnpm test -- --update-snapshots",
     "format": "prettier --write src playwright.config.ts playwright.test.ts tailwind.config.js README.md vite.config.ts postcss.config.cjs index.html .eslintrc.js"
   },
   "devDependencies": {

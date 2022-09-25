@@ -60,17 +60,12 @@ const apiMachine = createMachine(
 );
 
 const service = interpret(apiMachine);
-service.start();
-
-export const currentState = signal(service.getSnapshot().value);
-export const colors = signal(service.getSnapshot().context.data);
-const mapData = ({
-  context,
-  value,
-}: ReturnType<typeof service.getSnapshot>) => {
-  colors.value = context.data;
-  currentState.value = value;
-};
-service.onTransition(mapData);
 
 export const send = service.send;
+export const currentState = signal(service.getSnapshot().value);
+export const colors = signal(initialContext.data);
+service.onTransition(({ context, value }) => {
+  currentState.value = value;
+  colors.value = context.data;
+});
+service.start();

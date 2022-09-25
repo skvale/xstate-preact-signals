@@ -11,40 +11,14 @@ export const TwoStateApp = ({}: TwoStateAppProps) => {
   rerenderCount += 1;
   return (
     <div class="m-16">
+      <div class="text-sm mb-2">
+        <div>Count: {count.value}</div>
+        <div>Text: {text.value}</div>
+      </div>
+      <div class="mb-4">
+        These buttons alter the data here from a different component
+      </div>
       <OtherComponent />
-      <div>
-        The buttons above are in a different component, they alter the data for
-        this component
-      </div>
-      <br />
-      <hr />
-      <br />
-      <div>
-        This component, <code>TwoStateApp</code> doesn't have any local state.
-        It imports the state it needs
-        <br />
-        <hr />
-        <br />
-        <code>
-          <pre>
-            {`import { send, currentState, count, text } from "./Machine";`}
-          </pre>
-        </code>
-      </div>
-      <br />
-      <hr />
-      <br />
-      <div>rendered {rerenderCount} times</div>
-      <br />
-      <hr />
-      <br />
-      <p>A machine with 2 states</p>
-      <div>Count: {count.value}</div>
-      <div>Text: {text.value}</div>
-      <br />
-      <hr />
-      <br />
-      <hr />
       <button
         class={`bg-gray-300 border-4 ${
           currentState.value === "adding"
@@ -57,6 +31,19 @@ export const TwoStateApp = ({}: TwoStateAppProps) => {
       >
         {currentState.value}
       </button>
+      <div class="my-8">
+        This component doesn't have any local state It imports the state it
+        needs
+      </div>
+      <div class="my-8 text-sm">
+        <code>
+          <pre>
+            {`import { send, currentState, count, text } from "./Machine";`}
+          </pre>
+        </code>
+      </div>
+
+      <div class="mt-8 text-xs">component rendered {rerenderCount} times</div>
     </div>
   );
 };
