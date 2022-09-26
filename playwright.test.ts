@@ -25,8 +25,9 @@ test.describe.parallel("Site", () => {
     await (await findByRole("button", { name: "Add to state count" })).click();
     await findByText("Count: 1");
     await findByText("Text: aa");
-    await (await findByRole("button", { name: "adding" })).click();
-    await findByRole("button", { name: "subtracting" });
+    await findByText("Change the current state of the machine: adding");
+    await (await findByRole("button", { name: "Change current state" })).click();
+    await findByText("Change the current state of the machine: subtracting");
     await (
       await findByRole("button", { name: "Subtract from state text" })
     ).click();
