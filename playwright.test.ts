@@ -13,28 +13,34 @@ test.describe.parallel("Site", () => {
   }) => {
     await page.goto("/");
     await findAllByText("Home");
-    expect(await page.screenshot({ animations: "disabled" })).toMatchSnapshot(
-      "home.png"
+    await page.screenshot({ animations: "disabled" }).then((screenshot) => {
+      expect(screenshot).toMatchSnapshot("home.png");
+    });
+
+    await findAllByRole("link", { name: "2 state machine" }).then((elements) =>
+      elements.first().click()
     );
-    await (await findAllByRole("link", { name: "2 state machine" }))
-      .first()
-      .click();
-    expect(await page.screenshot({ animations: "disabled" })).toMatchSnapshot(
-      "two-state-initial.png"
+    await page.screenshot({ animations: "disabled" }).then((screenshot) => {
+      expect(screenshot).toMatchSnapshot("two-state-initial.png");
+    });
+
+    await findByRole("button", { name: "Add to state count" }).then((e) =>
+      e.click()
     );
-    await (await findByRole("button", { name: "Add to state count" })).click();
     await findByText("Count: 1");
     await findByText("Text: aa");
     await findByText("Change the current state of the machine: adding");
-    await (await findByRole("button", { name: "Change current state" })).click();
+    await findByRole("button", { name: "Change current state" }).then((e) =>
+      e.click()
+    );
     await findByText("Change the current state of the machine: subtracting");
-    await (
-      await findByRole("button", { name: "Subtract from state text" })
-    ).click();
+    await findByRole("button", { name: "Subtract from state text" }).then((e) =>
+      e.click()
+    );
     await findByText("Count: 1");
     await findByText("Text: a");
-    expect(await page.screenshot({ animations: "disabled" })).toMatchSnapshot(
-      "two-state-after.png"
-    );
+    await page.screenshot({ animations: "disabled" }).then((screenshot) => {
+      expect(screenshot).toMatchSnapshot("two-state-after.png");
+    });
   });
 });
