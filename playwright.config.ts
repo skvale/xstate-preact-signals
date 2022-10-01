@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
   updateSnapshots: "missing",
   timeout: 20000,
+  fullyParallel: true,
   webServer: {
     command: "pnpm build && pnpm serve",
     port: 3008,
