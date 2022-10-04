@@ -1,10 +1,10 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
+import type { PlaywrightTestConfig } from '@playwright/test';
 const config: PlaywrightTestConfig = {
-  updateSnapshots: "missing",
+  updateSnapshots: 'missing',
   timeout: 20000,
   fullyParallel: true,
   webServer: {
-    command: "pnpm build && pnpm serve",
+    command: 'pnpm build && pnpm serve',
     port: 3008,
     reuseExistingServer: true,
     timeout: 20000,
@@ -13,18 +13,18 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 2 : 0,
   projects: [
     {
-      name: "test",
+      name: 'test',
       use: {
         javaScriptEnabled: true,
       },
     },
   ],
   use: {
-    baseURL: "http://localhost:3008",
-    screenshot: "only-on-failure",
-    trace: "retain-on-failure",
+    baseURL: 'http://localhost:3008',
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
     launchOptions: {
-      ignoreDefaultArgs: ["--hide-scrollbars"],
+      ignoreDefaultArgs: ['--hide-scrollbars'],
     },
   },
 };

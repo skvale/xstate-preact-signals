@@ -1,40 +1,41 @@
-import { signal } from "@preact/signals";
-import { assign, createMachine, interpret } from "xstate";
+import { signal } from '@preact/signals';
+import { assign, createMachine, interpret } from 'xstate';
 
-const initialContext = {
+const initialContext: { count: number; text: string } = {
   count: 0,
-  text: "aa",
+  text: 'aa',
 };
 const twoStateMachine = createMachine(
   {
+    predictableActionArguments: true,
     schema: {
       context: {} as typeof initialContext,
     },
-    id: "simple",
-    initial: "adding",
+    id: 'simple',
+    initial: 'adding',
     context: initialContext,
     states: {
       adding: {
         on: {
           NEXT: {
-            target: "subtracting",
+            target: 'subtracting',
           },
           ACTION: {
-            actions: ["addOne"],
+            actions: ['addOne'],
           },
           ACTION2: {
-            actions: ["addLetter"],
+            actions: ['addLetter'],
           },
         },
       },
       subtracting: {
         on: {
-          NEXT: { target: "adding" },
+          NEXT: { target: 'adding' },
           ACTION: {
-            actions: ["subtractOne"],
+            actions: ['subtractOne'],
           },
           ACTION2: {
-            actions: ["removeLetter"],
+            actions: ['removeLetter'],
           },
         },
       },

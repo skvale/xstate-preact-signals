@@ -1,11 +1,11 @@
-import { h, render } from "preact";
-import { Router } from "preact-router";
+import { h, render } from 'preact';
+import { Router } from 'preact-router';
 
-import { Header } from "./components/Header";
-import { Home } from "./routes/Home";
-import { TwoStateApp } from "./routes/TwoState/TwoStateApp";
-import { ApiResponseApp } from "./routes/ApiResponse/ApiResponseApp";
-import "./index.css";
+import { Header } from './components/Header';
+import { Home } from './routes/Home';
+import { TwoStateApp } from './routes/TwoState/TwoStateApp';
+import { ApiResponseApp } from './routes/ApiResponse/ApiResponseApp';
+import './index.css';
 
 const App = () => (
   <div id="root">
@@ -18,4 +18,4 @@ const App = () => (
   </div>
 );
 
-render(<App />, document.getElementById("root")!);
+render(<App />, document.getElementById('root')!);

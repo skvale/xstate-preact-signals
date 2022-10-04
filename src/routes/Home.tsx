@@ -1,6 +1,6 @@
-import { h } from "preact";
-import { Link } from "preact-router";
-import { pages } from "../components/Header";
+import { h } from 'preact';
+import { Link } from 'preact-router';
+import { pages } from '../components/Header';
 
 type HomeProps = {
   path?: string;

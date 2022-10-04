@@ -1,6 +1,6 @@
-import { h } from "preact";
-import { send, currentState, count, text } from "./Machine";
-import { OtherComponent } from "./OtherComponent";
+import { h } from 'preact';
+import { send, currentState, count, text } from './Machine';
+import { OtherComponent } from './OtherComponent';
 
 type TwoStateAppProps = {
   path?: string;
@@ -35,12 +35,12 @@ export const TwoStateApp = ({}: TwoStateAppProps) => {
       </div>
       <button
         class={`bg-gray-300 border-4 ${
-          currentState.value === "adding"
-            ? "border-stone-700"
-            : "border-indigo-400"
+          currentState.value === 'adding'
+            ? 'border-stone-700'
+            : 'border-indigo-400'
         } active:bg-gray-200 py-2 px-4`}
         onClick={() => {
-          send({ type: "NEXT" });
+          send({ type: 'NEXT' });
         }}
       >
         Change current state

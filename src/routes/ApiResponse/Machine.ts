@@ -1,7 +1,7 @@
-import { signal } from "@preact/signals";
-import { assign, createMachine, interpret } from "xstate";
+import { signal } from '@preact/signals';
+import { assign, createMachine, interpret } from 'xstate';
 
-const API = "http://colormind.io/api/";
+const API = 'http://colormind.io/api/';
 
 type Color = [number, number, number];
 
@@ -11,11 +11,12 @@ const initialContext: { data: Color[] } = {
 
 const apiMachine = createMachine(
   {
+    predictableActionArguments: true,
     schema: {
       context: {} as typeof initialContext,
     },
-    id: "api",
-    initial: "loading",
+    id: 'api',
+    initial: 'loading',
     context: initialContext,
     states: {
       loading: {
@@ -23,26 +24,26 @@ const apiMachine = createMachine(
           src: () => async (callback) => {
             try {
               const result = await fetch(API, {
-                method: "POST",
-                body: JSON.stringify({ model: "default" }),
+                method: 'POST',
+                body: JSON.stringify({ model: 'default' }),
               });
               const json = await result.json();
-              callback({ type: "SUCCESS", json });
+              callback({ type: 'SUCCESS', json });
             } catch (e) {
-              callback({ type: "ERROR" });
+              callback({ type: 'ERROR' });
             }
           },
         },
         on: {
           SUCCESS: {
-            target: "loaded",
-            actions: "loadedComplete",
+            target: 'loaded',
+            actions: 'loadedComplete',
           },
         },
       },
       loaded: {
         on: {
-          FETCH: { target: "loading" },
+          FETCH: { target: 'loading' },
         },
       },
       error: {
