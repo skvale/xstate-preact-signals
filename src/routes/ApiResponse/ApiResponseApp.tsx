@@ -1,5 +1,6 @@
 import { h } from 'preact';
-import { send, colors } from './Machine';
+import { ColorBar } from './ColorBar';
+import { send, colors, options } from './Machine';
 
 type ApiResponseAppProps = {
   path?: string;
@@ -8,25 +9,26 @@ type ApiResponseAppProps = {
 let rerenderCount = 0;
 export const ApiResponseApp = ({}: ApiResponseAppProps) => {
   rerenderCount += 1;
+
   return (
     <div class="m-16">
       <div>Rerendered: {rerenderCount}</div>
-      <button
-        class={`bg-gray-300 border-4 active:bg-gray-200 py-2 px-4`}
-        onClick={() => {
-          send({ type: 'FETCH' });
+      <label className="block" htmlFor={'theme-select'}>
+        Select a color theme
+      </label>
+      <select
+        id="theme-select"
+        onChange={(e) => {
+          send({ type: 'FETCH', value: e.currentTarget.value });
         }}
       >
-        Fetch new colors
-      </button>
-      {colors.value.map((color) => (
-        <div
-          key={color.join(',')}
-          class="p-8 m-4"
-          style={`background: rgb(${color.join(', ')})`}
-        >
-          {color.join(',')}
-        </div>
+        <option>None</option>
+        {options.value.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
+      </select>
+      {colors.value.map((color, idx) => (
+        <ColorBar key={`${idx}-${color.join('-')}`} color={color} idx={idx} />
       ))}
     </div>
   );

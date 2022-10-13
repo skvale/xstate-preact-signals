@@ -41,5 +41,16 @@ test.describe('Site', () => {
     await page.screenshot().then((screenshot) => {
       expect(screenshot).toMatchSnapshot('two-state-after.png');
     });
+
+    await screen
+      .findByRole('link', { name: 'API Response' })
+      .then((e) => e.click());
+    await screen
+      .findByLabelText('Select a color theme')
+      .then((e) => expect(e).toHaveValue('None'));
+    await screen
+      .findByLabelText('Select a color theme')
+      .then((el) => el.selectOption('default'));
+    await screen.findAllByText('Randomize');
   });
 });
